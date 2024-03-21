@@ -6,18 +6,23 @@ const topics = ['tailwind-css', 'react'];
 const questions = ['jit-compilation', 'purge-files', 'dark-mode'];
 const random = ['varients', 'custom', 'plugins'];
 
-const ChannelBar = () => {
+let done = false;
+const ChannelBar = ({setTopicHeader}) => {
+  if (!done) {
+    // setTopicHeader('css');
+    done = true
+  }
   return (
     <div className="channel-bar shadow-lg">
       <ChannelBlock />
-      <Dropdown header='Topics' selections={topics} />
-      <Dropdown header='Questions' selections={questions} />
-      <Dropdown header='Random' selections={random} />
+      <Dropdown header='Topics' selections={topics} setTopicHeader={setTopicHeader}/>
+      <Dropdown header='Questions' selections={questions} setTopicHeader={setTopicHeader}/>
+      <Dropdown header='Random' selections={random} setTopicHeader={setTopicHeader}/>
     </div>
   )
 };
 
-const Dropdown = ({header, selections}) => {
+const Dropdown = ({header, selections, setTopicHeader}) => {
   const [expanded, setExpanded] = useState(true);
 
   return (
@@ -31,7 +36,7 @@ const Dropdown = ({header, selections}) => {
       </div>
       {expanded && 
         selections &&
-        selections.map((selection) => <TopicSelection selection={selection} />)}
+        selections.map((selection) => <TopicSelection selection={selection} setTopicHeader={setTopicHeader}/>)}
     </div>
   )
 }
@@ -45,10 +50,11 @@ const ChevronIcon = ({expanded}) => {
   );
 }
 
-const TopicSelection = ({selection}) => (
+const TopicSelection = ({selection, setTopicHeader}) => (
   <div className="dropdown-selection">
     <BsHash size='24' className='text-gray-400' />
-    <h5 className="dropdown-selection-text">{selection}</h5>
+    <h5 className="dropdown-selection-text" onClick={()=>{setTopicHeader(selection
+      )}}>{selection}</h5>
   </div>
 )
 
