@@ -2,9 +2,9 @@ import {useState} from 'react';
 import {BsHash} from 'react-icons/bs';
 import { FaChevronDown, FaChevronRight } from 'react-icons/fa';
 
-const topics = ['tailwind-css', 'react'];
-const questions = ['jit-compilation', 'purge-files', 'dark-mode'];
-const random = ['varients', 'custom', 'plugins'];
+const topics = ['tailwind-css', 'react', 'next-js', 'node-js', 'express', 'mongodb', 'javascript', 'html', 'css', 'git', 'github', 'vscode', 'interview-questions'];
+const questions = ['jit-compilation', 'purge-files', 'dark-mode', 'responsive-design', 'utility-first'];
+const random = ['varients', 'custom', 'plugins', 'config', 'extend', 'colors'];
 
 let done = false;
 const ChannelBar = ({setTopicHeader}) => {
@@ -15,9 +15,11 @@ const ChannelBar = ({setTopicHeader}) => {
   return (
     <div className="channel-bar shadow-lg">
       <ChannelBlock />
-      <Dropdown header='Topics' selections={topics} setTopicHeader={setTopicHeader}/>
-      <Dropdown header='Questions' selections={questions} setTopicHeader={setTopicHeader}/>
-      <Dropdown header='Random' selections={random} setTopicHeader={setTopicHeader}/>
+      <div className="channel-list">
+        <Dropdown header='Topics' selections={topics} setTopicHeader={setTopicHeader}/>
+        <Dropdown header='Questions' selections={questions} setTopicHeader={setTopicHeader}/>
+        <Dropdown header='Random' selections={random} setTopicHeader={setTopicHeader}/>
+      </div>
     </div>
   )
 };

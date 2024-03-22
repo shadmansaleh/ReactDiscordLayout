@@ -7,7 +7,7 @@ import {
   FaSun
 } from 'react-icons/fa';
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 const TopNavigation = ({heading}) => {
   return (
@@ -22,27 +22,33 @@ const TopNavigation = ({heading}) => {
   )
 }
 
-const ThemeIcon = () => {
-  const [darkTheme, setDarkTheme] = useState(true);
-  const toggleMode = () => {
-    if (!darkTheme) {
+class ThemeIcon extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {darkTheme : false};
+    if (this.state.darkTheme) window.document.documentElement.classList.add('dark');
+  }
+  toggleMode = () => {
+    if (!this.state.darkTheme) {
       window.document.documentElement.classList.add('dark');
     } else {
       window.document.documentElement.classList.remove('dark');
     }
-    setDarkTheme(!darkTheme);
+    this.setState({darkTheme: !this.state.darkTheme});
   }
-  return (
-    <span onClick={toggleMode}>
-      {darkTheme ? <FaMoon size='24' className='top-navigation-icon text-gray-200' /> : <FaSun size='24' className='top-navigation-icon text-gray-200' />}
-    </span>
-  )
-};
+  render() {
+    return (
+      <span onClick={this.toggleMode}>
+        {!this.state.darkTheme ? <FaMoon size='24' className='top-navigation-icon text-gray-500' /> : <FaSun size='24' className='top-navigation-icon text-gray-200' />}
+      </span>
+    )
+  }
+}
 
 const Search = () => (
     <div className="search">
       <input type="text" className="search-input" placeholder="Search..." />
-      <FaSearch size='18' className='text-secondary my-auto' />
+      <FaSearch size='18' className='text-secondary my-auto hover:text-pink-400 transition duration-300 ease-in-out' />
     </div>
 );
 
